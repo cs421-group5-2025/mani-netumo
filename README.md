@@ -10,6 +10,22 @@ It includes:
 - CI/CD and containerized deployment on AWS
 
 ---
+This system is deployed on an **Amazon EC2 Free Tier instance** using Docker Compose.
+
+- **Public IP**: http://13.62.0.111
+- **Port 80/443**: NGINX load balancer
+- **Backend API**: http://13.62.0.111/api/
+
+ou can access the docs via:
+> http://13.62.0.111/api/docs
+
+API endpoints:
+- `POST /targets`
+- `GET /targets`
+- `GET /status/{id}`
+- `GET /alerts`
+
+Authentication: **JWT Token** (passed via Authorization header)
 
 ## 📦 Technologies Used
 
@@ -66,3 +82,13 @@ meni-netumo/
 |__ screenshots
 ├── .env
 └── README.md
+
+## 👥 Contributors
+
+| GitHub Username | Role                         |
+|------------------|------------------------------|
+| Luckyferuzi      | Owner, Deployment, Docs      |
+| Fazilfizzo       | Frontend, Architecture       |
+| Issa885          | Backend API, Swagger Docs    |
+| KABIPE           | Monitoring + Celery Worker   |
+| sherlock-07      | CI/CD, Demo, Logs & Alerts   |
