@@ -11,6 +11,21 @@ It includes:
 
 ---
 
+## 📦 Technologies Used
+
+| Layer       | Tech Stack                        |
+|-------------|-----------------------------------|
+| Backend     | Python, Flask, Celery, Redis      |
+| Frontend    | React (Vite), Chart.js            |
+| Database    | MySQL                             |
+| Queue       | Redis                             |
+| Deployment  | Docker, Docker Compose, NGINX     |
+| CI/CD       | GitHub Actions, EC2 (AWS Free Tier)|
+| Alerts      | Mailtrap, Slack Webhook           |
+
+---
+
+
 
 1. Clone the repo:
 2. Create a .env file
