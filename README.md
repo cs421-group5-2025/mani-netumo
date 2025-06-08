@@ -53,3 +53,16 @@ python
 - CI/CD via GitHub Actions and Docker Hub
 
 ---
+
+meni-netumo/
+├── backend/
+│ ├── app/ # Flask app
+│ ├── Dockerfile
+│ └── requirements.txt
+├── frontend/ # React app
+├── nginx/ # NGINX load balancer config
+├── .github/workflows/ # GitHub Actions
+├── docker-compose.yml
+|__ screenshots
+├── .env
+└── README.md
