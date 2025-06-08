@@ -10,3 +10,17 @@ It includes:
 - CI/CD and containerized deployment on AWS
 
 ---
+
+
+1. Clone the repo:
+2. Create a .env file
+3. Run Docker
+4. Create DB tables
+with example of code 
+docker exec -it meni-netumo-backend-1 bash
+python
+>>> from app import create_app, db
+>>> app = create_app()
+>>> app.app_context().push()
+>>> db.create_all()
+>>> exit()
