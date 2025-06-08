@@ -26,7 +26,7 @@ It includes:
 ---
 
 
-
+Getting Started
 1. Clone the repo:
 2. Create a .env file
 3. Run Docker
@@ -39,3 +39,17 @@ python
 >>> app.app_context().push()
 >>> db.create_all()
 >>> exit()
+
+
+```md
+## 📊 Features
+
+- Add and manage monitored targets
+- Track latency and HTTP status logs
+- View 24h uptime stats in graphs
+- Daily SSL and domain expiry checks
+- Alert on consecutive downtime or expiry threshold
+- JWT-secured API
+- CI/CD via GitHub Actions and Docker Hub
+
+---
