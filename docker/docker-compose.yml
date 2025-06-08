@@ -1,7 +1,6 @@
-version: '3.8'
 services:
     mysql:
-      image: mysql:8
+      image: mysql:8.0
       environment:
         MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
         MYSQL_DATABASE: mininetumo
@@ -11,6 +10,11 @@ services:
         - mysql-data:/var/lib/mysql
       networks:
         - mininetumo-network
+      healthcheck:
+        test: ["CMD", "mysqladmin", "ping", -h", "localhost"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
     redis:
       image: redis:6
       ports:
@@ -27,8 +31,10 @@ services:
       volumes:
         - ../backend:/app
       depends_on:
-        - mysql
-        - redis
+        mysql:
+          condition: service_healthy
+        redis:
+          condition: service_started
       networks:
         - mininetumo-network
       environment:
@@ -37,23 +43,41 @@ services:
         - MYSQL_PASSWORD=
         - MYSQL_DATABASE=mininetumo
         - CELERY_BROKER_URL=redis://redis:6379/0
-        - JWT_SECRET_KEY=your-secret-key
-        - SLACK_WEBHOOK_URL=your-slack-webhook
-        - MAILTRAP_USERNAME=your-mailtrap-username
-        - MAILTRAP_PASSWORD=your-mailtrap-password
+        - JWT_SECRET_KEY=75d951b977bfc7d3b8c5d2a9ae89e99e0f99c3341a5cee8bacedeb5707d2449f5fd5d917388c724aa57bdd8d4be98cd83f336313b11a300157e3cfcf4d741f587c63b609b656500f36492da918f1eb8d84d27ef08650737809fcfd369dcc6287c87af4add049d7f9707313821a850a33e04f4145a103c72a02f4ba4d9c74bc38
+        - SLACK_WEBHOOK_URL=https://hooks.slack.com/services/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
+        - MAILTRAP_USERNAME=Lucky Feruzi
+        - MAILTRAP_PASSWORD=Lucky123@com
     worker:
       build:
         context: ../backend
-      command: celery -A worker.tasks worker --loglevel=info
+      command: celery -A app.celery worker --loglevel=info
       depends_on:
-        - redis
+        mysql:
+          condition: service_healthy
+        redis:
+          condition: service_started
       networks:
         - mininetumo-network
       environment:
         - CELERY_BROKER_URL=redis://redis:6379/0
+        - MYSQL_HOST=mysql
+        - MYSQL_USER=root
+        - MYSQL_PASSWORD=
+        - MYSQL_DATABASE=mininetumo
+    frontend:
+      build:
+        context: ../frontend
+      ports:
+        - "3000:3000"
+      depends_on:
+        - backend
+      networks:
+        - mininetumo-network
+
 volumes:
     mysql-data:
     redis-data:
+
 networks:
     mininetumo-network:
       driver: bridge

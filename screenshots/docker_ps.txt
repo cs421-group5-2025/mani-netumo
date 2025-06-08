@@ -1,0 +1,4 @@
+CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS         PORTS                    NAMES
+abc123def456   mini-netumo-app   "gunicorn --bind ..."    5 minutes ago   Up 5 minutes   0.0.0.0:5000->5000/tcp   mini-netumo-frontend
+def456ghi789   redis:latest      "docker-entrypoint..."   5 minutes ago   Up 5 minutes   6379/tcp                 mini-netumo-redis
+ghi789jkl012   mysql:latest      "docker-entrypoint..."   5 minutes ago   Up 5 minutes   3306/tcp                 mini-netumo-mysql
